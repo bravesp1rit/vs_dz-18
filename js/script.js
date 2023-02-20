@@ -9,26 +9,22 @@ const padString = function (string, num, symbol, boolean = true){
     if (num === undefined || typeof num  != 'number'){
         return 'error, missing number';
     }
-    if (num < string.length && boolean === true){
-        result = string.substring(0, num);
+    if (typeof boolean != 'boolean'){
+        return 'error, is not boolean';
+    }
+    if (num < string.length && boolean){
+        return string.substring(0, num);
+    } else if (num < string.length && !boolean){
+        return string.substring(string.length - num);
+    }
+    if (typeof symbol != 'string' || symbol.trim().length > 1){
+        return 'error, symbol is not string or greater then 1';
+    }
+    if (string.length == num && boolean || string.length == num && !boolean){
         return result;
-    } else if (num < string.length && boolean === false){
-        resultIfFalse = string.substring(string.length - num);
-        return resultIfFalse;
     }
-    if (symbol.length > 1){
-        return 'error, symbol length is greater then 1';
-    }
-    if (string.length == num && boolean === true){
-        result = string;
-        return result;
-    } else if (string.length == num && boolean === false){
-        resultIfFalse = string;
-        return resultIfFalse;
-    }
-    
     for (let i = string.length; i < num; ++i){
-        if (boolean === true){
+        if (boolean){
             result += symbol;
         } else {
             resultIfFalse += symbol;
@@ -38,7 +34,7 @@ const padString = function (string, num, symbol, boolean = true){
             }
         }
     }
-    if (boolean === true){
+    if (boolean){
         return result;
     } else {
         return resultIfFalse;
@@ -48,3 +44,7 @@ const padString = function (string, num, symbol, boolean = true){
 console.log(padString('hello', 3, '*', false));
 console.log(padString('hello', 8, '`'));
 console.log(padString('string', 3));
+console.log(padString('qwerty', 3, '=', false));
+console.log(padString('qwerty', 3, '='));
+console.log(padString('qwerty', 10, '=', false));
+console.log(padString('qwerty', 6, '=', false));
