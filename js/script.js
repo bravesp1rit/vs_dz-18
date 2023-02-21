@@ -3,15 +3,10 @@
 const padString = function (string, strLength, symbol, right = true) {
     let result = string;
     let resultIfFalse = '';
-    if (typeof string != 'string' || string.trim() === '') {
-        return 'error, missing string';
-    }
-    if (typeof strLength != 'number') {
-        return 'error, missing number';
-    }
-    if (typeof right != 'boolean') {
-        return 'error, is not right';
-    }
+    if (typeof string != 'string' || string.trim() === '') return 'error, missing string';
+    if (typeof strLength != 'number') return 'error, missing number';
+    if (typeof right != 'boolean') return 'error, is not right';
+    
     if (strLength < string.length && right) {
         return string.substring(0, strLength);
     } else if (strLength < string.length && !right) {
